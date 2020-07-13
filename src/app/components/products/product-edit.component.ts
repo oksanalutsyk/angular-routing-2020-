@@ -19,6 +19,7 @@ export class ProductEditComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder
   ) {}
+  
   ngOnInit(): void {
     this.editForm = this.fb.group({
       title: ['', Validators.required],
@@ -40,14 +41,16 @@ export class ProductEditComponent implements OnInit {
 
   onProductRetrieved(product: IProduct): void {
     this.product = product;
-
     if (this.product.id === 0) {
       this.pageTitle = 'Add Product';
     } else {
       this.pageTitle = `Edit Product: ${this.product.title}`;
     }
   }
-  onSubmit(){
-    
+  onSubmit() {
+    console.log(this.editForm.value);
+  }
+  showMessage(): boolean {
+    return this.editForm.dirty;
   }
 }

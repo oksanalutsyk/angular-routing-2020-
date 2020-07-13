@@ -16,6 +16,7 @@ import { ProductService } from './producr.service';
 
 // import { AuthGuard } from '../user/auth-guard.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProductEditGuard } from './product-guard.service';
 
 
 @NgModule({
@@ -41,12 +42,14 @@ import { ReactiveFormsModule } from '@angular/forms';
             path: ':id/edit',
             component: ProductEditComponent,
             resolve: { product: ProductResolverService },
+            canDeactivate:[ProductEditGuard],
+
           },
       //   ],
       // },
     ]),
   ],
   declarations: [ProductsComponent, ProductEditComponent],
-  providers: [ProductService, ProductResolverService],
+  providers: [ProductService, ProductResolverService, ProductEditGuard],
 })
 export class ProductsModule {}

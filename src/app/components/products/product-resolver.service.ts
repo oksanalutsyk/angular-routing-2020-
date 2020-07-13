@@ -11,7 +11,6 @@ import {
   Router,
 } from '@angular/router';
 import { ProductService } from './producr.service';
-import { error } from 'protractor';
 
 @Injectable({
   providedIn: 'root',
@@ -38,7 +37,6 @@ export class ProductResolverService implements Resolve<IProduct> {
         return null;
       }),
       catchError((error) => {
-        // console.log(`Retrieval error: ${error}`);
         console.log(error);
         this.router.navigate(['/products']);
         return of(null);

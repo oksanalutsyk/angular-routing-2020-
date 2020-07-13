@@ -4,4 +4,8 @@
 @import '~bootstrap/scss/bootstrap';
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 20px; font-family: Roboto, "Helvetica Neue", sans-serif; }
+button{
+    outline: none!important;
+    cursor: pointer;
+}

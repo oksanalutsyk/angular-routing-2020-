@@ -2,14 +2,14 @@
     "products": [
       {
         "id": 1,
-        "title": "ooooooooo",
-        "body": "ccifuhviuadoajso[ivjao["
+        "title": "Product 1",
+        "body": "  Lorem ipsum dolor, sit amet consectetur adipisicing elit."
 
       },
       {
         "id": 2,
-        "title": "yyyyyyjhvhvhgvhg",
-        "body": "cccccccccccccccc"
+        "title": "Product 2",
+        "body": "  Lorem ipsum dolor, sit amet consectetur adipisicing elit."
       }
     ]
   }
