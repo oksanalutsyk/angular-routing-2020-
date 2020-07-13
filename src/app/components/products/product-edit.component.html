@@ -1,0 +1,19 @@
+<h1>{{pageTitle}}</h1>
+
+<form class="example-container" [formGroup]="editForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" />
+    </mat-form-field>
+    <br />
+    <mat-form-field appearance="fill">
+        <mat-label>Body</mat-label>
+        <input matInput formControlName="body" />
+      </mat-form-field>
+  
+   
+    <div class="example-button-row">
+      <button mat-button color="primary" type="submit">Save</button>
+      <button mat-button color="warn" type="button">Cancel</button>
+    </div>
+  </form>

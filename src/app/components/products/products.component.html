@@ -1,0 +1,29 @@
+<!-- <p>products works!</p> -->
+<mat-table [dataSource]="products" class="mat-elevation-z8">
+  <!-- Position Column -->
+  <ng-container matColumnDef="position">
+    <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.id }} </mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef  > Name </mat-header-cell>
+    <mat-cell *matCellDef="let element" [routerLink]="['/products', element.id]"> {{ element.title }} </mat-cell>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="text">
+    <mat-header-cell *matHeaderCellDef> Text </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{ element.body }} </mat-cell>
+  </ng-container>
+  <!-- Edit Column -->
+  <ng-container matColumnDef="edit">
+    <mat-header-cell *matHeaderCellDef> Edit</mat-header-cell>
+    <mat-cell *matCellDef="let element" [routerLink]="['/products', element.id, 'edit']"> <button mat-button color="accent">Edit</button></mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+</mat-table>
+
