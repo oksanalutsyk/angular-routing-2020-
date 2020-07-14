@@ -1,15 +1,14 @@
 {
-    "products": [
-      {
-        "id": 1,
-        "title": "Product 1",
-        "body": "  Lorem ipsum dolor, sit amet consectetur adipisicing elit."
-
-      },
-      {
-        "id": 2,
-        "title": "Product 2",
-        "body": "  Lorem ipsum dolor, sit amet consectetur adipisicing elit."
-      }
-    ]
-  }
+  "products": [
+    {
+      "id": 1,
+      "title": "Product 1",
+      "body": "description"
+    },
+    {
+      "id": 2,
+      "title": "Product 2",
+      "body": "  Lorem ipsum dolor, sit amet consectetur adipisicing elit."
+    }
+  ]
+}

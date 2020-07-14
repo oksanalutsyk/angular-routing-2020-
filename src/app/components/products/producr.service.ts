@@ -23,6 +23,9 @@ export class ProductService {
     }
     return this.http.get<IProduct>(`${this.url}/${id}`);
   }
+  public editProduct(product: IProduct): Observable<IProduct[]> {
+    return this.http.put<IProduct[]>(`${this.url}/${product.id}`, product);
+  }
 
   initializeProduct(): IProduct {
     // Return an initialized object

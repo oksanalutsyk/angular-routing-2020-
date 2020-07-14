@@ -8,8 +8,11 @@ import { ProductEditComponent } from './product-edit.component';
 export class ProductEditGuard implements CanDeactivate<ProductEditComponent> {
   constructor() {}
   canDeactivate(component: ProductEditComponent): boolean {
+    if(component.editStatus){
+      return !component.showMessage() || confirm('Navigate away and SAVE all changes?')
+    }
     return (
-      !component.showMessage() || confirm('Navigate away and lose all changes?')
+      !component.showMessage() || confirm('Navigate away and LOSE all changes?')
     );
   }
 }

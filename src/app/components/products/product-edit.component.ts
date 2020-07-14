@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { IProduct } from './product.interface';
+import { IProduct, NewProduct } from './product.interface';
 import { ProductService } from './producr.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-products-edit',
@@ -14,21 +14,35 @@ export class ProductEditComponent implements OnInit {
   product: IProduct;
   editForm: FormGroup;
 
-  constructor(
-    private productService: ProductService,
-    private route: ActivatedRoute,
-    private fb: FormBuilder
-  ) {}
-  
-  ngOnInit(): void {
-    this.editForm = this.fb.group({
-      title: ['', Validators.required],
-      body: ['', [Validators.required]],
-    });
+  productTitle = '';
+  productText = '';
 
+  editId:number;
+  editProductTitle='';
+  editProductText='';
+  editStatus = false;
+
+  constructor(
+    public productService: ProductService,
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
     this.route.params.subscribe((params) => {
       let id = +params['id'];
+      this.editId = id;
       this.getProduct(id);
+    });
+    this.route.data.subscribe((data) => {
+      this.productTitle = data.product.title;
+      this.productText = data.product.body;
+    });
+
+    this.editForm = this.fb.group({
+      title: [this.productTitle, Validators.required],
+      body: [this.productText, [Validators.required]],
     });
   }
 
@@ -47,8 +61,22 @@ export class ProductEditComponent implements OnInit {
       this.pageTitle = `Edit Product: ${this.product.title}`;
     }
   }
+  saveEditChanges() {
+    const newProduct: IProduct = new NewProduct(
+      this.editId,
+      this.editProductTitle,
+      this.editProductText
+    );
+    console.log(newProduct);
+    this.productService.editProduct(newProduct).subscribe();
+  }
   onSubmit() {
     console.log(this.editForm.value);
+    this.editProductTitle = this.editForm.value.title;
+    this.editProductText = this.editForm.value.body;
+    this.saveEditChanges();
+    this.editStatus = true;
+    this.router.navigate(['/products']);
   }
   showMessage(): boolean {
     return this.editForm.dirty;
