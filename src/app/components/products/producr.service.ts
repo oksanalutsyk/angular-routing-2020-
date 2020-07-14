@@ -27,6 +27,13 @@ export class ProductService {
     return this.http.put<IProduct[]>(`${this.url}/${product.id}`, product);
   }
 
+  public addProduct(product: IProduct): Observable<IProduct[]> {
+    return this.http.post<IProduct[]>(this.url, product);
+  }
+  public delProduct(id: number): Observable<IProduct[]> {
+    return this.http.delete<IProduct[]>(`${this.url}/${id}`);
+  }
+
   initializeProduct(): IProduct {
     // Return an initialized object
     return {

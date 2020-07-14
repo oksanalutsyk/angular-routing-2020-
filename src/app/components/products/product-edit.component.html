@@ -12,7 +12,8 @@
   
    
     <div class="example-button-row">
-      <button mat-button color="primary" type="submit" >Save</button>
-      <button mat-button color="warn" type="button" [routerLink]="['/products']" >Cancel</button>
+      <button mat-button color="primary" type="submit" (click)="save()">Save</button>
+      <button mat-button color="accent" type="button" [routerLink]="['/products']" (click)="cancel()" >Cancel</button>
+      <button mat-button color="warn" (click)="deleteProduct(product)"  [routerLink]="['/products']">Delete</button>
     </div>
   </form>
