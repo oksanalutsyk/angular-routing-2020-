@@ -8,30 +8,30 @@ import { AuthGuard } from './components/user/auth-guard.service';
 // import { AuthGuard } from './components/products/products.module';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: 'home', component: HomeComponent, children:[
-    {
-      path: '',
-      loadChildren: './components/home/home.module#HomeModule',
-    },
-  ] },
-
-  // {
-  //   path: 'home',
-  //   component: HomeComponent,
-  //   children: [
-  //     { path: '', redirectTo: 'home', pathMatch: 'full' },
-  //     { path: 'news', component: NewsComponent },
-  //     { path: 'about', component: AboutComponent },
-  //   ],
-  // },
-  // { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  {
+    path: 'home',
+    component: HomeComponent,
+    children: [
+      //lazy loading
+      {
+        path: '',
+        // loadChildren: './components/home/home.module#HomeModule',
+        loadChildren: () =>
+          import('./components/home/home.module').then((mod) => mod.HomeModule),
+      },
+    ],
+  },
   //lazy loading
   {
     path: 'products',
     //guard
-    canActivate:[AuthGuard],
-    loadChildren: './components/products/products.module#ProductsModule',
+    canActivate: [AuthGuard],
+    // loadChildren: './components/products/products.module#ProductsModule',
+    loadChildren: () =>
+      import('./components/products/products.module').then(
+        (mod) => mod.ProductsModule
+      ),
   },
   { path: '**', component: PageNotFoundComponent },
 ];
