@@ -14,7 +14,6 @@
     <button mat-button *ngIf="authService.isLoggedIn()">
       Welcome {{ authService.currentUser.userName }}
     </button>
-    <button mat-button>Show Messages</button>
     <button
       mat-button
       [routerLink]="['/login']"
