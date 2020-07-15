@@ -6,17 +6,18 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { ProductsComponent } from '../../components/products/product-list/products.component';
 import { ProductDetailComponent } from '../../components/products/product-detail/product-detail.component';
 import { ProductEditComponent } from '../../components/products/product-edit/product-edit.component';
+import { ProductAddComponent } from 'src/app/components/products/product-add/product-add.component';
 
 import { ProductResolver } from '../resolvers/product.resolver';
 import { ProductService } from '../services/product.service';
 
-// import { AuthGuard } from '../user/auth-guard.service';
-import { ReactiveFormsModule } from '@angular/forms';
-import { ProductEditGuard } from '../guards/product.guard';
+import { ProductEditGuard } from '../guards/product-edit.guard';
+import { ProductAddGuard } from '../guards/product-add.guard';
 
 
 @NgModule({
@@ -27,10 +28,6 @@ import { ProductEditGuard } from '../guards/product.guard';
     MatInputModule,
     ReactiveFormsModule,
     RouterModule.forChild([
-      // {
-      //   path: 'products',
-      //   canActivate:[AuthGuard],
-      //   children: [
           { path: '', component: ProductsComponent },
 
           {
@@ -45,11 +42,15 @@ import { ProductEditGuard } from '../guards/product.guard';
             canDeactivate:[ProductEditGuard],
 
           },
-      //   ],
-      // },
+          {
+            path: ':id/add',
+            component: ProductAddComponent,
+            canDeactivate:[ProductAddGuard],
+
+          },
     ]),
   ],
-  declarations: [ProductsComponent, ProductEditComponent],
-  providers: [ProductService, ProductResolver, ProductEditGuard],
+  declarations: [ProductsComponent, ProductEditComponent, ProductAddComponent],
+  providers: [ProductService, ProductResolver, ProductEditGuard, ProductAddGuard],
 })
 export class ProductsModule {}

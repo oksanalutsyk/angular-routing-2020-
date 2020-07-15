@@ -61,14 +61,14 @@ export class ProductEditComponent implements OnInit {
       }
     );
   }
-  onProductRetrieved(product: ProductInterface): void {
-    this.product = product;
-    if (this.product.id === 0) {
-      this.pageTitle = 'Add Product';
-    } else {
-      this.pageTitle = `Edit Product: ${this.product.title}`;
-    }
-  }
+  // onProductRetrieved(product: ProductInterface): void {
+  //   this.product = product;
+  //   if (this.product.id === 0) {
+  //     this.pageTitle = 'Add Product';
+  //   } else {
+  //     this.pageTitle = `Edit Product: ${this.product.title}`;
+  //   }
+  // }
   saveEditChanges() {
     const newProduct: ProductInterface = new NewProduct(
       this.editId,
@@ -78,40 +78,42 @@ export class ProductEditComponent implements OnInit {
     console.log(newProduct);
     this.productService.editProduct(newProduct).subscribe();
   }
-  addNewProduct() {
-    const newProduct: ProductInterface = new NewProduct(
-      0,
-      this.editProductTitle,
-      this.editProductText
-    );
-    if (this.products.length >= 1) {
-      newProduct.id = this.products.slice(-1)[0].id + 1;
-      this.subscription = this.productService
-        .addProduct(newProduct)
-        .subscribe();
-    } else {
-      this.newProduct = {
-        id: 0,
-        title: this.editProductTitle,
-        body: this.editProductText,
-      };
-      this.subscription = this.productService
-        .addProduct(newProduct)
-        .subscribe();
-    }
-  }
-  updateProducts() {
-    if (this.editId !== 0 ) {
-      this.saveEditChanges();
-    } else {
-      this.addNewProduct();
-    }
-  }
+  // addNewProduct() {
+  //   const newProduct: ProductInterface = new NewProduct(
+  //     0,
+  //     this.editProductTitle,
+  //     this.editProductText
+  //   );
+  //   if (this.products.length >= 1) {
+  //     newProduct.id = this.products.slice(-1)[0].id + 1;
+  //     this.subscription = this.productService
+  //       .addProduct(newProduct)
+  //       .subscribe();
+  //   } else {
+  //     this.newProduct = {
+  //       id: 0,
+  //       title: this.editProductTitle,
+  //       body: this.editProductText,
+  //     };
+  //     this.subscription = this.productService
+  //       .addProduct(newProduct)
+  //       .subscribe();
+  //   }
+  // }
+  // updateProducts() {
+  //   // if (this.editId !== 0 ) {
+  //     this.saveEditChanges();
+  //   // } else {
+  //     // this.addNewProduct();
+  //   // }
+  // }
   onSubmit() {
     console.log(this.editForm.value);
     this.editProductTitle = this.editForm.value.title;
     this.editProductText = this.editForm.value.body;
-    this.updateProducts();
+    this.saveEditChanges();
+
+    // this.updateProducts();
     this.router.navigate(['/products']);
   }
   save() {
