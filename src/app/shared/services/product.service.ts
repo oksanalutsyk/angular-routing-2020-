@@ -17,9 +17,6 @@ export class ProductService {
     return this.http.get<ProductInterface[]>(this.url).pipe(delay(1000));
   }
   public getProduct(id: number): Observable<ProductInterface> {
-    if (id === 0) {
-      return of(this.initializeProduct());
-    }
     return this.http.get<ProductInterface>(`${this.url}${id}`);
   }
   public editProduct(product: ProductInterface): Observable<ProductInterface[]> {
@@ -31,14 +28,5 @@ export class ProductService {
   }
   public delProduct(id: number): Observable<ProductInterface[]> {
     return this.http.delete<ProductInterface[]>(`${this.url}${id}`);
-  }
-
-  initializeProduct(): ProductInterface {
-    // Return an initialized object
-    return {
-      id: 0,
-      title: null,
-      body: null,
-    };
   }
 }
