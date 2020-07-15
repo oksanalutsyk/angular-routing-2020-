@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../../shared/services/product.service';
-
-import { ProductInterface } from '../../../shared/interfaces/product.interface';
 import { ActivatedRoute } from '@angular/router';
+
+import { ProductService } from '../../../shared/services/product.service';
+import { ProductInterface } from '../../../shared/interfaces/product.interface';
 
 @Component({
   selector: 'app-products-detail',
@@ -11,39 +11,12 @@ import { ActivatedRoute } from '@angular/router';
 export class ProductDetailComponent implements OnInit {
   product: ProductInterface;
   errorMessage: string;
-  constructor(
-    private productService: ProductService,
-    private route: ActivatedRoute
-  ) {}
+
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    //   Without resolver (we need getProduct method)
-    // -----------------------------------
-    //snapShot or ...
-    // let id = +this.route.snapshot.params['id'];
-    //   this.getProduct(id)
-    // ...observable
-    // this.route.params.subscribe((params) => {
-    //   let id = +params['id'];
-    //   this.getProduct(id);
-    // });
-    // -----------------------------------
-
-    // With resolver
-    // this.product = this.route.snapshot.data['product']
-
     this.route.data.subscribe((data) => {
-      console.log(data)
       this.product = data['product'];
     });
   }
-  // -----------------------------------
-  //get product
-  //   public getProduct(id: number): void {
-  //     this.productService.getProduct(id).subscribe(
-  //       (data) => (this.product = data),
-  //       (error) => (this.errorMessage = error)
-  //     );
-  //   }
-  // ----------------------------------------------
 }

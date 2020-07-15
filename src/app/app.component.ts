@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService } from './shared/services/auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from './shared/services/auth.service';
+
 
 @Component({
   selector: 'app-root',
@@ -9,14 +10,13 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'routing-app';
-  active = 1;
+  // active = 1;
 
   constructor(public authService: AuthService, private router: Router) {}
 
   logOut(): void {
     this.authService.logout();
     this.router.navigate(['/']);
-    console.log('Log out');
   }
 }
  

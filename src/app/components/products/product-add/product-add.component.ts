@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+
 import { ProductInterface } from '../../../shared/interfaces/product.interface';
 import { ProductService } from '../../../shared/services/product.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { NewProduct } from 'src/app/shared/classes/product.class';
 
 @Component({
@@ -17,17 +17,18 @@ export class ProductAddComponent implements OnInit {
   addForm: FormGroup;
   productTitle = '';
   productText = '';
-  addProductTitle = '';
-  addProductText = '';
 
   products: Array<ProductInterface> = [];
   product: ProductInterface;
   newProduct: ProductInterface;
   subscription: Subscription;
-  addStatus=false;
+  addStatus = false;
 
-
-  constructor(private fb: FormBuilder, public productService: ProductService,private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    public productService: ProductService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.addForm = this.fb.group({
@@ -36,12 +37,11 @@ export class ProductAddComponent implements OnInit {
     });
   }
 
-
   addNewProduct() {
     const newProduct: ProductInterface = new NewProduct(
       0,
-      this.addProductTitle,
-      this.addProductText
+      this.productTitle,
+      this.productText
     );
     if (this.products.length >= 1) {
       newProduct.id = this.products.slice(-1)[0].id + 1;
@@ -51,8 +51,8 @@ export class ProductAddComponent implements OnInit {
     } else {
       this.newProduct = {
         id: 0,
-        title: this.addProductTitle,
-        body: this.addProductText,
+        title: this.productTitle,
+        body: this.productText,
       };
       this.subscription = this.productService
         .addProduct(newProduct)
@@ -72,10 +72,9 @@ export class ProductAddComponent implements OnInit {
   }
   onSubmit() {
     console.log(this.addForm.value);
-    this.addProductTitle = this.addForm.value.title;
-    this.addProductText = this.addForm.value.body;
+    this.productTitle = this.addForm.value.title;
+    this.productText = this.addForm.value.body;
     this.addNewProduct();
     this.router.navigate(['/products']);
   }
-
 }

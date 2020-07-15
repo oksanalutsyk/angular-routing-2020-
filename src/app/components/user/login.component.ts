@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '../../shared/services/auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   templateUrl: './login.component.html',
@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
-  errorMessage: string;
   pageTitle = 'Log In';
   hide = true;
 
@@ -38,7 +37,6 @@ export class LoginComponent implements OnInit {
     } else {
       this.router.navigate(['products']);
     }
-
     console.log(this.loginForm.value);
   }
 }

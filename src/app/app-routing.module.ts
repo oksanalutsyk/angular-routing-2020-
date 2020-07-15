@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
+//components
 import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-
+//guards
 import { AuthGuard } from './shared/guards/auth.guard';
-// import { AuthGuard } from './components/products/products.module';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -13,7 +12,6 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent,
     children: [
-      //lazy loading
       {
         path: '',
         // loadChildren: './components/home/home.module#HomeModule',
@@ -22,10 +20,8 @@ const routes: Routes = [
       },
     ],
   },
-  //lazy loading
   {
     path: 'products',
-    //guard
     canActivate: [AuthGuard],
     // loadChildren: './components/products/products.module#ProductsModule',
     loadChildren: () =>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../../shared/services/product.service';
 import { Subscription } from 'rxjs';
+
+import { ProductService } from '../../../shared/services/product.service';
 import { ProductInterface } from '../../../shared/interfaces/product.interface';
 
 @Component({
@@ -11,12 +12,13 @@ import { ProductInterface } from '../../../shared/interfaces/product.interface';
 export class ProductsComponent implements OnInit {
   private subscription: Subscription;
 
-  products:ProductInterface[]=[]
+  products: ProductInterface[] = [];
   displayedColumns: string[] = ['position', 'name', 'text', 'edit'];
+
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
-    this.getProducts()
+    this.getProducts();
   }
 
   //get all products
@@ -30,5 +32,4 @@ export class ProductsComponent implements OnInit {
       }
     );
   }
-  
 }

@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
-
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-
-import { ProductInterface } from '../interfaces/product.interface';
 import {
   Resolve,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   Router,
 } from '@angular/router';
+import { ProductInterface } from '../interfaces/product.interface';
 import { ProductService } from '../services/product.service';
 
 @Injectable({

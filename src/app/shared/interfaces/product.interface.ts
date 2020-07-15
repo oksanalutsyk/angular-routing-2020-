@@ -3,4 +3,3 @@ export interface ProductInterface {
   title: string;
   body: string;
 }
-

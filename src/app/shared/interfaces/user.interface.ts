@@ -1,5 +1,4 @@
-/* Defines the user entity */
 export interface IUser {
-    id: number;
-    userName: string;
+  id: number;
+  userName: string;
 }

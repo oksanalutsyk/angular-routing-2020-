@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductInterface } from '../../../shared/interfaces/product.interface';
-import { ProductService } from '../../../shared/services/product.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+
+import { ProductInterface } from '../../../shared/interfaces/product.interface';
+import { ProductService } from '../../../shared/services/product.service';
 import { NewProduct } from 'src/app/shared/classes/product.class';
 
 @Component({
@@ -13,17 +13,15 @@ import { NewProduct } from 'src/app/shared/classes/product.class';
 })
 export class ProductEditComponent implements OnInit {
   pageTitle: string = 'Product Edit';
+
   products: Array<ProductInterface> = [];
   product: ProductInterface;
   newProduct: ProductInterface;
-  editForm: FormGroup;
 
+  editForm: FormGroup;
   productTitle = '';
   productText = '';
-
-  editId: number;
-  editProductTitle = '';
-  editProductText = '';
+  productId: number;
   editStatus = false;
 
   subscription: Subscription;
@@ -38,13 +36,13 @@ export class ProductEditComponent implements OnInit {
   ngOnInit(): void {
     //get product
     this.route.data.subscribe((data) => {
-      console.log(data)
+      console.log(data);
       this.product = data['product'];
-      this.editId = this.product.id;
+      this.productId = this.product.id;
       this.productTitle = this.product.title;
       this.productText = this.product.body;
     });
-  
+
     this.editForm = this.fb.group({
       title: [this.productTitle, Validators.required],
       body: [this.productText, [Validators.required]],
@@ -61,59 +59,20 @@ export class ProductEditComponent implements OnInit {
       }
     );
   }
-  // onProductRetrieved(product: ProductInterface): void {
-  //   this.product = product;
-  //   if (this.product.id === 0) {
-  //     this.pageTitle = 'Add Product';
-  //   } else {
-  //     this.pageTitle = `Edit Product: ${this.product.title}`;
-  //   }
-  // }
   saveEditChanges() {
     const newProduct: ProductInterface = new NewProduct(
-      this.editId,
-      this.editProductTitle,
-      this.editProductText
+      this.productId,
+      this.productTitle,
+      this.productText
     );
-    console.log(newProduct);
     this.productService.editProduct(newProduct).subscribe();
   }
-  // addNewProduct() {
-  //   const newProduct: ProductInterface = new NewProduct(
-  //     0,
-  //     this.editProductTitle,
-  //     this.editProductText
-  //   );
-  //   if (this.products.length >= 1) {
-  //     newProduct.id = this.products.slice(-1)[0].id + 1;
-  //     this.subscription = this.productService
-  //       .addProduct(newProduct)
-  //       .subscribe();
-  //   } else {
-  //     this.newProduct = {
-  //       id: 0,
-  //       title: this.editProductTitle,
-  //       body: this.editProductText,
-  //     };
-  //     this.subscription = this.productService
-  //       .addProduct(newProduct)
-  //       .subscribe();
-  //   }
-  // }
-  // updateProducts() {
-  //   // if (this.editId !== 0 ) {
-  //     this.saveEditChanges();
-  //   // } else {
-  //     // this.addNewProduct();
-  //   // }
-  // }
+
   onSubmit() {
     console.log(this.editForm.value);
-    this.editProductTitle = this.editForm.value.title;
-    this.editProductText = this.editForm.value.body;
+    this.productTitle = this.editForm.value.title;
+    this.productText = this.editForm.value.body;
     this.saveEditChanges();
-
-    // this.updateProducts();
     this.router.navigate(['/products']);
   }
   save() {
@@ -126,7 +85,6 @@ export class ProductEditComponent implements OnInit {
   deleteProduct(item: ProductInterface): void {
     const id = item.id;
     this.subscription = this.productService.delProduct(id).subscribe(() => {
-
       console.log(`Post id ${id} deleted`);
     });
   }
