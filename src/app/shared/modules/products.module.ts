@@ -11,7 +11,7 @@ import { ProductsComponent } from '../../components/products/product-list/produc
 import { ProductDetailComponent } from '../../components/products/product-detail/product-detail.component';
 import { ProductEditComponent } from '../../components/products/product-edit/product-edit.component';
 
-import { ProductResolverService } from '../resolvers/product.service';
+import { ProductResolver } from '../resolvers/product.resolver';
 import { ProductService } from '../services/product.service';
 
 // import { AuthGuard } from '../user/auth-guard.service';
@@ -36,12 +36,12 @@ import { ProductEditGuard } from '../guards/product.guard';
           {
             path: ':id',
             component: ProductDetailComponent,
-            resolve: { product: ProductResolverService },
+            resolve: { product: ProductResolver },
           },
           {
             path: ':id/edit',
             component: ProductEditComponent,
-            resolve: { product: ProductResolverService },
+            resolve: { product: ProductResolver },
             canDeactivate:[ProductEditGuard],
 
           },
@@ -50,6 +50,6 @@ import { ProductEditGuard } from '../guards/product.guard';
     ]),
   ],
   declarations: [ProductsComponent, ProductEditComponent],
-  providers: [ProductService, ProductResolverService, ProductEditGuard],
+  providers: [ProductService, ProductResolver, ProductEditGuard],
 })
 export class ProductsModule {}

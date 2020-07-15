@@ -1,5 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IProduct } from '../../../shared/interfaces/product.interface';
+import { Component, OnInit } from '@angular/core';
+import { ProductInterface } from '../../../shared/interfaces/product.interface';
 import { ProductService } from '../../../shared/services/product.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -13,9 +13,9 @@ import { NewProduct } from 'src/app/shared/classes/product.class';
 })
 export class ProductEditComponent implements OnInit {
   pageTitle: string = 'Product Edit';
-  products: Array<IProduct> = [];
-  product: IProduct;
-  newProduct: IProduct;
+  products: Array<ProductInterface> = [];
+  product: ProductInterface;
+  newProduct: ProductInterface;
   editForm: FormGroup;
 
   productTitle = '';
@@ -36,16 +36,15 @@ export class ProductEditComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      let id = +params['id'];
-      this.editId = id;
-      this.getProduct(id);
-    });
+    //get product
     this.route.data.subscribe((data) => {
-      this.productTitle = data.product.title;
-      this.productText = data.product.body;
+      console.log(data)
+      this.product = data['product'];
+      this.editId = this.product.id;
+      this.productTitle = this.product.title;
+      this.productText = this.product.body;
     });
-
+  
     this.editForm = this.fb.group({
       title: [this.productTitle, Validators.required],
       body: [this.productText, [Validators.required]],
@@ -62,14 +61,7 @@ export class ProductEditComponent implements OnInit {
       }
     );
   }
-  getProduct(id: number): void {
-    this.productService.getProduct(id).subscribe(
-      (product: IProduct) => this.onProductRetrieved(product),
-      (error: any) => console.error(error)
-    );
-  }
-
-  onProductRetrieved(product: IProduct): void {
+  onProductRetrieved(product: ProductInterface): void {
     this.product = product;
     if (this.product.id === 0) {
       this.pageTitle = 'Add Product';
@@ -78,7 +70,7 @@ export class ProductEditComponent implements OnInit {
     }
   }
   saveEditChanges() {
-    const newProduct: IProduct = new NewProduct(
+    const newProduct: ProductInterface = new NewProduct(
       this.editId,
       this.editProductTitle,
       this.editProductText
@@ -87,7 +79,7 @@ export class ProductEditComponent implements OnInit {
     this.productService.editProduct(newProduct).subscribe();
   }
   addNewProduct() {
-    const newProduct: IProduct = new NewProduct(
+    const newProduct: ProductInterface = new NewProduct(
       0,
       this.editProductTitle,
       this.editProductText
@@ -129,7 +121,7 @@ export class ProductEditComponent implements OnInit {
     this.editStatus = false;
   }
 
-  deleteProduct(item: IProduct): void {
+  deleteProduct(item: ProductInterface): void {
     const id = item.id;
     this.subscription = this.productService.delProduct(id).subscribe(() => {
 
@@ -139,10 +131,4 @@ export class ProductEditComponent implements OnInit {
   showMessage(): boolean {
     return this.editForm.dirty;
   }
-
-  //  ngOnDestroy(): void {
-  //     if (this.subscription) {
-  //       this.subscription.unsubscribe();
-  //     }
-  //   }
 }

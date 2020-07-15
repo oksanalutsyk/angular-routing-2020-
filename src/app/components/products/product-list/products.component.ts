@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../shared/services/product.service';
 import { Subscription } from 'rxjs';
-import { IProduct } from '../../../shared/interfaces/product.interface';
+import { ProductInterface } from '../../../shared/interfaces/product.interface';
 
 @Component({
   selector: 'app-products',
@@ -11,7 +11,7 @@ import { IProduct } from '../../../shared/interfaces/product.interface';
 export class ProductsComponent implements OnInit {
   private subscription: Subscription;
 
-  products:IProduct[]=[]
+  products:ProductInterface[]=[]
   displayedColumns: string[] = ['position', 'name', 'text', 'edit'];
   constructor(private productService: ProductService) {}
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../shared/services/product.service';
 
-import { IProduct } from '../../../shared/interfaces/product.interface';
+import { ProductInterface } from '../../../shared/interfaces/product.interface';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './product-detail.component.html',
 })
 export class ProductDetailComponent implements OnInit {
-  product: IProduct;
+  product: ProductInterface;
   errorMessage: string;
   constructor(
     private productService: ProductService,
@@ -33,6 +33,7 @@ export class ProductDetailComponent implements OnInit {
     // this.product = this.route.snapshot.data['product']
 
     this.route.data.subscribe((data) => {
+      console.log(data)
       this.product = data['product'];
     });
   }

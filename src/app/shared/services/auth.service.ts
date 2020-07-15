@@ -7,6 +7,7 @@ export class AuthService {
   currentUser: IUser;
   //for guard
   redirectUrl: string;
+  
   constructor() {}
 
   isLoggedIn(): boolean {

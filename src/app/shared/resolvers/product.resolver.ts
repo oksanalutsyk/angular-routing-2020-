@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-import { IProduct } from '../interfaces/product.interface';
+import { ProductInterface } from '../interfaces/product.interface';
 import {
   Resolve,
   ActivatedRouteSnapshot,
@@ -15,18 +15,13 @@ import { ProductService } from '../services/product.service';
 @Injectable({
   providedIn: 'root',
 })
-export class ProductResolverService implements Resolve<IProduct> {
+export class ProductResolver implements Resolve<ProductInterface> {
   constructor(private productServise: ProductService, private router: Router) {}
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<IProduct> {
+  ): Observable<ProductInterface> {
     let id = route.params['id'];
-    if (isNaN(id)) {
-      console.log(`Product id was not a number: ${id}`);
-      this.router.navigate(['/products']);
-      return of(null);
-    }
     return this.productServise.getProduct(+id).pipe(
       map((product) => {
         if (product) {
