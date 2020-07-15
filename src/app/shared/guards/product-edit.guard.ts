@@ -14,5 +14,6 @@ export class ProductEditGuard implements CanDeactivate<ProductEditComponent> {
     return (
       !component.showMessage() || confirm('Navigate away and LOSE all changes?')
     );
+    
   }
 }

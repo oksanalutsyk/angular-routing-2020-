@@ -8,10 +8,9 @@ import { ProductInterface } from '../interfaces/product.interface';
 
 @Injectable()
 export class ProductService {
-  private url: string;
+  private url='http://localhost:3000/products/';
 
   constructor(private http: HttpClient) {
-    this.url = 'http://localhost:3000/products';
   }
 
   public getProducts(): Observable<ProductInterface[]> {
@@ -21,17 +20,17 @@ export class ProductService {
     if (id === 0) {
       return of(this.initializeProduct());
     }
-    return this.http.get<ProductInterface>(`${this.url}/${id}`);
+    return this.http.get<ProductInterface>(`${this.url}${id}`);
   }
   public editProduct(product: ProductInterface): Observable<ProductInterface[]> {
-    return this.http.put<ProductInterface[]>(`${this.url}/${product.id}`, product);
+    return this.http.put<ProductInterface[]>(`${this.url}${product.id}`, product);
   }
 
   public addProduct(product: ProductInterface): Observable<ProductInterface[]> {
     return this.http.post<ProductInterface[]>(this.url, product);
   }
   public delProduct(id: number): Observable<ProductInterface[]> {
-    return this.http.delete<ProductInterface[]>(`${this.url}/${id}`);
+    return this.http.delete<ProductInterface[]>(`${this.url}${id}`);
   }
 
   initializeProduct(): ProductInterface {

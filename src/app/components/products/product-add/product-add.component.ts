@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -11,7 +11,7 @@ import { NewProduct } from 'src/app/shared/classes/product.class';
   selector: 'app-products-add',
   templateUrl: './product-add.component.html',
 })
-export class ProductAddComponent implements OnInit {
+export class ProductAddComponent implements OnInit, OnDestroy {
   pageTitle: string = 'Product Add';
 
   addForm: FormGroup;
@@ -76,5 +76,12 @@ export class ProductAddComponent implements OnInit {
     this.productText = this.addForm.value.body;
     this.addNewProduct();
     this.router.navigate(['/products']);
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+      this.subscription = null;
+    }
   }
 }

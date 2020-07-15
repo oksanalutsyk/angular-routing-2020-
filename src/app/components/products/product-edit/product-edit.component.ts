@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -11,7 +11,7 @@ import { NewProduct } from 'src/app/shared/classes/product.class';
   selector: 'app-products-edit',
   templateUrl: './product-edit.component.html',
 })
-export class ProductEditComponent implements OnInit {
+export class ProductEditComponent implements OnInit, OnDestroy {
   pageTitle: string = 'Product Edit';
 
   products: Array<ProductInterface> = [];
@@ -90,5 +90,12 @@ export class ProductEditComponent implements OnInit {
   }
   showMessage(): boolean {
     return this.editForm.dirty;
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+      this.subscription = null;
+    }
   }
 }

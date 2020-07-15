@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ProductService } from '../../../shared/services/product.service';
@@ -9,8 +9,8 @@ import { ProductInterface } from '../../../shared/interfaces/product.interface';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
 })
-export class ProductsComponent implements OnInit {
-  private subscription: Subscription;
+export class ProductsComponent implements OnInit, OnDestroy {
+  subscription: Subscription;
 
   products: ProductInterface[] = [];
   displayedColumns: string[] = ['position', 'name', 'text', 'edit'];
@@ -31,5 +31,12 @@ export class ProductsComponent implements OnInit {
         console.error(err);
       }
     );
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+      this.subscription = null;
+    }
   }
 }
