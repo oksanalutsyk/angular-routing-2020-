@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from './producr.service';
+import { ProductService } from '../../../shared/services/product.service';
 import { Subscription } from 'rxjs';
-import { IProduct } from './product.interface';
+import { IProduct } from '../../../shared/interfaces/product.interface';
 
 @Component({
   selector: 'app-products',

@@ -10,9 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 
-import { UserModule } from './components/user/user.module';
+import { UserModule } from './shared/modules/user.module';
 // ??????????
-import { HomeModule } from './components/home/home.module';
+import { HomeModule } from './shared/modules/home.module';
 
 @NgModule({
   declarations: [

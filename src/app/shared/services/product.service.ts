@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
-import { IProduct } from './product.interface';
+import { IProduct } from '../interfaces/product.interface';
 
 @Injectable()
 export class ProductService {

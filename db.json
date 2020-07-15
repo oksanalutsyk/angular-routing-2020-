@@ -1,9 +1,19 @@
 {
   "products": [
     {
-      "id": 4,
-      "title": "sgv",
-      "body": "srg"
+      "id": 5,
+      "title": "Product1",
+      "body": "rrggr"
+    },
+    {
+      "id": 6,
+      "title": "Product 2",
+      "body": "description"
+    },
+    {
+      "id": 7,
+      "title": "Product 3",
+      "body": "description"
     }
   ]
 }

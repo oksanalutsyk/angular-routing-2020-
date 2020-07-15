@@ -3,14 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-import { IProduct } from './product.interface';
+import { IProduct } from '../interfaces/product.interface';
 import {
   Resolve,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   Router,
 } from '@angular/router';
-import { ProductService } from './producr.service';
+import { ProductService } from '../services/product.service';
 
 @Injectable({
   providedIn: 'root',

@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
-import { AuthGuard } from './components/user/auth-guard.service';
+import { AuthGuard } from './shared/guards/auth.guard';
 // import { AuthGuard } from './components/products/products.module';
 
 const routes: Routes = [
@@ -18,7 +18,7 @@ const routes: Routes = [
         path: '',
         // loadChildren: './components/home/home.module#HomeModule',
         loadChildren: () =>
-          import('./components/home/home.module').then((mod) => mod.HomeModule),
+          import('./shared/modules/home.module').then((mod) => mod.HomeModule),
       },
     ],
   },
@@ -29,7 +29,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     // loadChildren: './components/products/products.module#ProductsModule',
     loadChildren: () =>
-      import('./components/products/products.module').then(
+      import('./shared/modules/products.module').then(
         (mod) => mod.ProductsModule
       ),
   },

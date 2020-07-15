@@ -7,11 +7,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 
-import { LoginComponent } from './login.component';
+import { LoginComponent } from '../../components/user/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { AuthService } from './auth.service';
-import { AuthGuard } from './auth-guard.service';
+import { AuthService } from '../services/auth.service';
+import { AuthGuard } from '../guards/auth.guard';
 
 @NgModule({
   imports: [

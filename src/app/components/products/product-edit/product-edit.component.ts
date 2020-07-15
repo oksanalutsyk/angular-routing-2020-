@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IProduct, NewProduct } from './product.interface';
-import { ProductService } from './producr.service';
+import { IProduct } from '../../../shared/interfaces/product.interface';
+import { ProductService } from '../../../shared/services/product.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { NewProduct } from 'src/app/shared/classes/product.class';
 
 @Component({
   selector: 'app-products-edit',
