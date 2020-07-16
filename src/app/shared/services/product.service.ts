@@ -8,7 +8,7 @@ import { ProductInterface } from '../interfaces/product.interface';
 
 @Injectable()
 export class ProductService {
-  private url='http://localhost:3000/products/';
+  private url='products/';
 
   constructor(private http: HttpClient) {
   }

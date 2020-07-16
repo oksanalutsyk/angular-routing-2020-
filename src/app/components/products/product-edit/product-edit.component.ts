@@ -72,8 +72,8 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     console.log(this.editForm.value);
     this.productTitle = this.editForm.value.title;
     this.productText = this.editForm.value.body;
-    this.saveEditChanges();
     this.router.navigate(['/products']);
+    this.saveEditChanges();
   }
   save() {
     this.editStatus = true;

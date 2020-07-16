@@ -14,7 +14,6 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        // loadChildren: './components/home/home.module#HomeModule',
         loadChildren: () =>
           import('./shared/modules/home.module').then((mod) => mod.HomeModule),
       },
@@ -23,7 +22,6 @@ const routes: Routes = [
   {
     path: 'products',
     canActivate: [AuthGuard],
-    // loadChildren: './components/products/products.module#ProductsModule',
     loadChildren: () =>
       import('./shared/modules/products.module').then(
         (mod) => mod.ProductsModule
