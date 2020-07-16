@@ -60,11 +60,8 @@ export class ProductAddComponent implements OnInit, OnDestroy {
     }
   }
 
-  save() {
+  changeAddStatus() {
     this.addStatus = true;
-  }
-  cancel() {
-    this.addStatus = false;
   }
 
   showMessage(): boolean {

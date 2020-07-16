@@ -69,18 +69,17 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log(this.editForm.value);
     this.productTitle = this.editForm.value.title;
     this.productText = this.editForm.value.body;
     this.router.navigate(['/products']);
     this.saveEditChanges();
+    console.log(this.editForm.value);
+
   }
-  save() {
+  changeEditStatus() {
     this.editStatus = true;
   }
-  cancel() {
-    this.editStatus = false;
-  }
+
 
   deleteProduct(item: ProductInterface): void {
     const id = item.id;

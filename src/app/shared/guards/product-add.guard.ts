@@ -10,11 +10,9 @@ export class ProductAddGuard implements CanDeactivate<ProductAddComponent> {
   constructor() {}
   
   canDeactivate(component: ProductAddComponent,): boolean {
-    if(component.addStatus ){
-      return !component.showMessage() || confirm('Navigate away and SAVE all changes?')
+    if(!component.addStatus ){
+      return !component.showMessage() || confirm('Navigate away and LOSE all changes?')
     }
-    return (
-      !component.showMessage() || confirm('Navigate away and LOSE all changes?')
-    );
+    return true
   }
 }
