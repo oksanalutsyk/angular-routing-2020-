@@ -8,7 +8,6 @@ import { AboutComponent } from '../../components/about/about.component';
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'news', component: NewsComponent },
       { path: 'about', component: AboutComponent },
     ]),
